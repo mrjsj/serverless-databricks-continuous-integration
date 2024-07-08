@@ -41,4 +41,8 @@ def test_schema(spark: SparkSession, request):
 
 @pytest.fixture(scope="function")
 def test_table(request):
-    return request.function.__name__
+    table_name = request.function.__name__
+
+    yield table_name
+
+    spark.sql(f"DROP TABLE IF EXISTS {table_name}")
