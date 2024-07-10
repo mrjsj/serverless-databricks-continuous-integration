@@ -40,7 +40,7 @@ def test_schema(spark: SparkSession, request):
     spark.sql(f"DROP SCHEMA IF EXISTS {test_schema_name} CASCADE")
 
 @pytest.fixture(scope="function")
-def test_table(request):
+def test_table(spark: SparkSession, request):
     table_name = request.function.__name__
 
     yield table_name
